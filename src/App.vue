@@ -10,6 +10,24 @@ import TheHeader from './components/layout/TheHeader'
 export default {
     components: {
         TheHeader
+    },
+
+    computed: {
+        dudAutoLogout() {
+            return this.$store.getters.didAutoLogout;
+        }
+    },
+
+    created() {
+        this.$store.dispatch('tryLogin');
+    },
+
+    watch: {
+        didAutoLogout(curlValue, oldValue) {
+            if (curlValue && curlValue !== oldValue) {
+                this.$router.replace('/coaches');
+            }
+        }
     }
 }
 </script>
